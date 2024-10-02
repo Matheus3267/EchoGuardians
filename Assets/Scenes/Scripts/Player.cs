@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     public float jumpHeight = 2.0f;      // Altura do pulo
     public float flightHeightSpeed = 3.0f;  // Velocidade de subir/descer no voo
 
+    [SerializeField] public bool playerAnimalArara;
+
     private Vector3 velocity;
     private bool isGrounded;
     private bool canWalk = true;
@@ -33,9 +35,13 @@ public class Player : MonoBehaviour
             velocity.y = -2f;  // Resetar a velocidade ao tocar o chão
         }
 
-        // Alternar entre andar e voar ao pressionar "F"
-        if (Input.GetKeyDown(KeyCode.F))
+        // Alternar entre andar e voar ao pressionar "C"
+        if (Input.GetKeyDown(KeyCode.C))
         {
+            // Se o jogador não estiver jogando como arara, não conseguira voar
+            if (!playerAnimalArara) return;
+
+            // Se o jogador estiver no chão, não ativa o modo voo (precisa estar no ar para voar)
             if (isGrounded) return;
 
             isFlying = !isFlying;
